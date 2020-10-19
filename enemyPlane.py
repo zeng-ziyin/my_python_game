@@ -19,6 +19,7 @@ class smallEnemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width, self.height = background_size
         self.speed = 3
+        self.hp = 1
         self.activate = True
         self.rect.left, self.rect.top = randint((self.width + self.rect.width), (5 * self.width)), \
                                         randint(0, self.height - self.rect.height)
@@ -44,6 +45,7 @@ class midEnemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width, self.height = background_size
         self.speed = 2
+        self.hp = 3
         self.activate = True
         self.rect.left, self.rect.top = randint(2 * (self.width + self.rect.width), 10 * self.width), \
                                         randint(0, self.height - self.rect.height)
@@ -69,6 +71,7 @@ class bigEnemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width, self.height = background_size
         self.speed = 1.5
+        self.hp = 7
         self.activate = True
         self.rect.left, self.rect.top = randint(3 * (self.width + self.rect.width), 15 * self.width), \
                                         randint(0, self.height - self.rect.height)
@@ -95,6 +98,7 @@ class boss(pygame.sprite.Sprite):
         self.rect = self.image1.get_rect()
         self.width, self.height = background_size
         self.speed = 0.5
+        self.hp = 20
         self.activate = True
         self.in_sound_key = True
         self.rect.left, self.rect.top = randint(5 * (self.width + self.rect.width), 20 * self.width), \

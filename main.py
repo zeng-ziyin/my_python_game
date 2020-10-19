@@ -75,6 +75,7 @@ def main():
 
     # 当运行关键词为True时，持续循环，False时终止循环
     while running:
+
         for event in pygame.event.get():  # 检测不常用按钮是否被点击
             if event.type == QUIT:
                 pygame.quit()
@@ -106,7 +107,9 @@ def main():
             if not wudi:
                 hero.activate = False
             for enemy in hero_collide:
-                enemy.activate = False
+                enemy.hp -= 1
+                if enemy.hp <= 0:
+                    enemy.activate = False
 
         # 碰撞检测---bullet与enemy是否碰撞
         for bullet in hero.hero_bullet_list:
@@ -114,7 +117,9 @@ def main():
             if bullet_collide:
                 bullet.activate = False
                 for enemy in bullet_collide:
-                    enemy.activate = False
+                    enemy.hp -= 1
+                    if enemy.hp <= 0:
+                        enemy.activate = False
 
         # 生成并更新画面
         screen.blit(background, (0, 0))
