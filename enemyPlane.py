@@ -22,6 +22,7 @@ class smallEnemy(pygame.sprite.Sprite):
         self.activate = True
         self.rect.left, self.rect.top = randint((self.width + self.rect.width), (5 * self.width)), \
                                         randint(0, self.height - self.rect.height)
+        self.mask = pygame.mask.from_surface(self.image)
 
     def move(self):
         if self.rect.right > 0:
@@ -46,6 +47,7 @@ class midEnemy(pygame.sprite.Sprite):
         self.activate = True
         self.rect.left, self.rect.top = randint(2 * (self.width + self.rect.width), 10 * self.width), \
                                         randint(0, self.height - self.rect.height)
+        self.mask = pygame.mask.from_surface(self.image)
 
     def move(self):
         if self.rect.right > 0:
@@ -70,6 +72,7 @@ class bigEnemy(pygame.sprite.Sprite):
         self.activate = True
         self.rect.left, self.rect.top = randint(3 * (self.width + self.rect.width), 15 * self.width), \
                                         randint(0, self.height - self.rect.height)
+        self.mask = pygame.mask.from_surface(self.image)
 
     def move(self):
         if self.rect.right > 0:
@@ -93,8 +96,10 @@ class boss(pygame.sprite.Sprite):
         self.width, self.height = background_size
         self.speed = 0.5
         self.activate = True
+        self.in_sound_key = True
         self.rect.left, self.rect.top = randint(5 * (self.width + self.rect.width), 20 * self.width), \
                                         randint(0, self.height - self.rect.height)
+        self.mask = pygame.mask.from_surface(self.image1)
 
     def move(self):
         if self.rect.right > 0:

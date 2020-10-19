@@ -21,7 +21,7 @@ game_title = "zzy game"  # 游戏标题
 background_size = (940, 540)  # 背景图片大小
 delays = 200  # 设置切换图片的延迟系数值
 boss_in_sound = pygame.mixer.Sound(boss_in_sound_path)  # 加载boss出场音效
-boss_in_sound.set_volume(0.1)  # boss出场音效音量大小
+boss_in_sound.set_volume(0.2)  # boss出场音效音量大小
 smallEnemy_down_sound = pygame.mixer.Sound(smallEnemy_down_sound_path)  # 加载small_enemy毁灭音效
 smallEnemy_down_sound.set_volume(0.1)  # small_enemy毁灭音效音量大小
 
@@ -35,7 +35,7 @@ def set_music(music_path):
     """
     pygame.mixer.init()
     pygame.mixer.music.load(music_path)  # 加载背景音乐
-    pygame.mixer.music.set_volume(0.5)  # 音量大小
+    pygame.mixer.music.set_volume(0.4)  # 音量大小
     pygame.mixer.music.play(-1)  # 循环次数，-1为无限循环
 
 
@@ -46,6 +46,7 @@ def main():
     pygame.display.set_caption(game_title)  # 设置标题
     screen = pygame.display.set_mode(background_size)  # 这里后期要调全屏还有硬件加速，在这里修改
     running = True  # 运行关键词，False则中断运行
+    wudi = False
     clock = pygame.time.Clock()
     delay = delays  # 创建切换图片的延迟系数delay,调整的话在全局变量里面调
 
@@ -78,6 +79,11 @@ def main():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == K_u:
+                    wudi = not wudi
+                if event.key == K_SPACE:
+                    hero.use_bullet()
 
         key_pressed = pygame.key.get_pressed()  # 检测常用按钮是否被持续按下
         if key_pressed[K_w] or key_pressed[K_UP]:
@@ -89,18 +95,26 @@ def main():
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
             hero.move_right()
 
-        clock.tick(60)  # 界面设置为60帧
         # 每次循环，延迟系数-1，归零时重置
         delay -= 1
         if delay == -delays:
             delay = delays
 
         # 碰撞检测---hero与enemy是否碰撞
-        hero_collide = pygame.sprite.spritecollide(hero, enemys, False)
+        hero_collide = pygame.sprite.spritecollide(hero, enemys, False, pygame.sprite.collide_mask)
         if hero_collide:
-            hero.activate = False
+            if not wudi:
+                hero.activate = False
             for enemy in hero_collide:
                 enemy.activate = False
+
+        # 碰撞检测---bullet与enemy是否碰撞
+        for bullet in hero.hero_bullet_list:
+            bullet_collide = pygame.sprite.spritecollide(bullet, enemys, False)
+            if bullet_collide:
+                bullet.activate = False
+                for enemy in bullet_collide:
+                    enemy.activate = False
 
         # 生成并更新画面
         screen.blit(background, (0, 0))
@@ -116,6 +130,13 @@ def main():
             hero.reset()
             running = False
 
+        for bullet in hero.hero_bullet_list:
+            if bullet.activate:
+                screen.blit(bullet.image, bullet.rect)
+                bullet.move()
+            else:
+                hero.remove_bullet(bullet)
+
         # 生成并切换boss图片
         for boss in bosses:
             if boss.activate:
@@ -124,8 +145,9 @@ def main():
                     screen.blit(boss.image2, boss.rect)
                 else:
                     screen.blit(boss.image1, boss.rect)
-                if boss.rect.left < 1040:
+                if boss.rect.left < 1040 and boss.in_sound_key == True:
                     boss_in_sound.play()
+                    boss.in_sound_key = False
             else:  # 绘制destory图像
                 boss.reset()
         # 生成big_enemy
@@ -148,13 +170,15 @@ def main():
                 small_enemy.move()
                 screen.blit(small_enemy.image, small_enemy.rect)
             else:
-                smallEnemy_down_sound.play()
-                if not (delay % 3):
+                if not (delay % 2):  # 每三帧切换一次毁灭图片
+                    if small_enemy_destory_index == 0:
+                        smallEnemy_down_sound.play()
                     screen.blit(small_enemy.destory_image[small_enemy_destory_index], small_enemy.rect)
                     small_enemy_destory_index = (small_enemy_destory_index + 1) % 4
                     if small_enemy_destory_index == 0:
                         small_enemy.reset()
 
+        clock.tick(60)  # 界面设置为60帧
         pygame.display.update()
 
 

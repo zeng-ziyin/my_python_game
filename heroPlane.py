@@ -1,4 +1,5 @@
 import pygame
+import  bullet
 
 
 class heroPlane(object):
@@ -12,10 +13,12 @@ class heroPlane(object):
         self.image1 = pygame.image.load(".\\py_game_test\\madoka1.jpg").convert_alpha()
         self.image2 = pygame.image.load(".\\py_game_test\\madoka2.jpg").convert_alpha()
         self.rect = self.image1.get_rect()
-        self.width, self.height = background_size
+        self.width, self.height = self.background_size = background_size
         self.rect.left, self.rect.top = 40, (self.height - self.rect.height) // 2
         self.speed = 10
         self.activate = True
+        self.mask = pygame.mask.from_surface(self.image1)
+        self.hero_bullet_list = []
 
     def move_up(self):
         if self.rect.top > 0:
@@ -40,6 +43,13 @@ class heroPlane(object):
             self.rect.left += self.speed
         else:
             self.rect.right = self.width
+
+    def use_bullet(self):
+        newBullet = bullet.heroBullet(self.rect, self.background_size)
+        self.hero_bullet_list.append(newBullet)
+
+    def remove_bullet(self, bul):
+        self.hero_bullet_list.remove(bul)
 
     def reset(self):
         self.activate = True
