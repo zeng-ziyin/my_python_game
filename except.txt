@@ -1,0 +1,120 @@
+Sun Oct 18 13:04:42 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 124, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 105, in main
+    boss_in_sound.play()
+AttributeError: 'NoneType' object has no attribute 'play'
+
+Sun Oct 18 13:56:42 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 151, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 60, in main
+    enemyPlane.add_small_enemy(enemys, small_enemys, 15, background_size)
+  File "D:\pycharm\pythonPlaneGameProject\enemyPlane.py", line 113, in add_small_enemy
+    enemy = smallEnemy(background_size)
+  File "D:\pycharm\pythonPlaneGameProject\enemyPlane.py", line 15, in __init__
+    self.destory_image.extend([pygame.image.load(".\\images\\enemy1_down1.png").convent_alpha(),
+AttributeError: 'pygame.Surface' object has no attribute 'convent_alpha'
+
+Sun Oct 18 13:56:53 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 151, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 60, in main
+    enemyPlane.add_small_enemy(enemys, small_enemys, 15, background_size)
+  File "D:\pycharm\pythonPlaneGameProject\enemyPlane.py", line 113, in add_small_enemy
+    enemy = smallEnemy(background_size)
+  File "D:\pycharm\pythonPlaneGameProject\enemyPlane.py", line 15, in __init__
+    self.destory_image.extend([pygame.image.load(".\\images\\enemy1_down1.png").convent_alpha(),
+AttributeError: 'pygame.Surface' object has no attribute 'convent_alpha'
+
+Sun Oct 18 14:04:36 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 161, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 101, in main
+    me.activate = False
+NameError: name 'me' is not defined
+
+Sun Oct 18 14:04:52 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 161, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 124, in main
+    screen.blit(boss.image1, boss.rect)
+pygame.error: display Surface quit
+
+Sun Oct 18 14:05:46 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 161, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 124, in main
+    screen.blit(boss.image1, boss.rect)
+pygame.error: display Surface quit
+
+Sun Oct 18 14:06:16 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 161, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 124, in main
+    screen.blit(boss.image1, boss.rect)
+pygame.error: display Surface quit
+
+Sun Oct 18 14:07:38 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 161, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 124, in main
+    screen.blit(boss.image1, boss.rect)
+pygame.error: display Surface quit
+
+Sun Oct 18 14:07:58 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 161, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 124, in main
+    screen.blit(boss.image1, boss.rect)
+pygame.error: display Surface quit
+
+Sun Oct 18 21:38:10 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 166, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 82, in main
+    if event.key == K_u:
+AttributeError: 'Event' object has no attribute 'key'
+
+Mon Oct 19 14:54:10 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 167, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 83, in main
+    if event.ke == K_u:
+AttributeError: 'Event' object has no attribute 'ke'
+
+Mon Oct 19 19:02:29 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 178, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 86, in main
+    hero.use_bullet()
+  File "D:\pycharm\pythonPlaneGameProject\heroPlane.py", line 48, in use_bullet
+    newBullet = bullet.heroBullet(self.rect, self.background_size)
+  File "D:\pycharm\pythonPlaneGameProject\bullet.py", line 17, in __init__
+    self.image = pygame.image.load(".\\py_game_test\\magic_bullet")
+pygame.error: Couldn't open .\py_game_test\magic_bullet
+
+Mon Oct 19 19:02:42 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 178, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 86, in main
+    hero.use_bullet()
+  File "D:\pycharm\pythonPlaneGameProject\heroPlane.py", line 48, in use_bullet
+    newBullet = bullet.heroBullet(self.rect, self.background_size)
+  File "D:\pycharm\pythonPlaneGameProject\bullet.py", line 20, in __init__
+    self.rect.left, self.rect.right = rect.rigth, rect.top + 55
+AttributeError: 'pygame.Rect' object has no attribute 'rigth'
+
