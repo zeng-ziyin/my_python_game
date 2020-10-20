@@ -71,7 +71,9 @@ def collide_test(hero, enemys, wudi):
     hero_collide = pygame.sprite.spritecollide(hero, enemys, False, pygame.sprite.collide_mask)
     if hero_collide:
         if not wudi[0]:
-            hero.activate = False
+            hero.hp -= 1
+            if hero.hp <= 0:
+                hero.activate = False
         for enemy in hero_collide:
             enemy.hp -= 1
             if enemy.hp <= 0:

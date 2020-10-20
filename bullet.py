@@ -14,10 +14,10 @@ class heroBullet(object):
     def __init__(self, rect, background_size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load(".\\py_game_test\\magic_bullet.jpg")
+        self.image = pygame.image.load(".\\py_game_test\\magic_bullet.png")
         self.rect = self.image.get_rect()
         self.width, self.height = background_size
-        self.rect.left, self.rect.top = rect.right, rect.top + 55
+        self.rect.left, self.rect.top = rect.right, rect.top + (rect.height - self.rect.height) // 2
         # self.num_y = random.uniform(-1, 1)  # 创建随机y轴偏移
         self.speed = 25
         self.activate = True

@@ -164,3 +164,17 @@ Traceback (most recent call last):
     if not wudi[0]:
 NameError: name 'wudi' is not defined
 
+Tue Oct 20 19:00:57 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 216, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 140, in main
+    keyboard_control(hero, wudi, bon_num, delay, enemys)  # 调用键盘控制函数
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 47, in keyboard_control
+    hero.use_bullet()
+  File "D:\pycharm\pythonPlaneGameProject\heroPlane.py", line 49, in use_bullet
+    newBullet = bullet.heroBullet(self.rect, self.background_size)
+  File "D:\pycharm\pythonPlaneGameProject\bullet.py", line 17, in __init__
+    self.image = pygame.image.load(".\\py_game_test\\magic_bullet.jpg")
+pygame.error: Couldn't open .\py_game_test\magic_bullet.jpg
+

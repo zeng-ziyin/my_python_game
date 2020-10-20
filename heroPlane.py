@@ -10,12 +10,13 @@ class heroPlane(object):
     def __init__(self, background_size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image1 = pygame.image.load(".\\py_game_test\\madoka1.jpg").convert_alpha()
-        self.image2 = pygame.image.load(".\\py_game_test\\madoka2.jpg").convert_alpha()
+        self.image1 = pygame.image.load(".\\py_game_test\\madoka1.png").convert_alpha()
+        self.image2 = pygame.image.load(".\\py_game_test\\madoka2.png").convert_alpha()
         self.rect = self.image1.get_rect()
         self.width, self.height = self.background_size = background_size
         self.rect.left, self.rect.top = 40, (self.height - self.rect.height) // 2
         self.speed = 10
+        self.hp = 3
         self.activate = True
         self.mask = pygame.mask.from_surface(self.image1)
         self.hero_bullet_list = []
