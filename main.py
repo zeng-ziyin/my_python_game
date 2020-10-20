@@ -19,11 +19,73 @@ game_title = "zzy game"  # 游戏标题
 
 # 全局变量:初始化各参数值
 background_size = (940, 540)  # 背景图片大小
-delays = 200  # 设置切换图片的延迟系数值
+delays = 300  # 设置切换图片的延迟系数值
+bon_nums = 3  # 设置全屏炸弹次数
 boss_in_sound = pygame.mixer.Sound(boss_in_sound_path)  # 加载boss出场音效
 boss_in_sound.set_volume(0.2)  # boss出场音效音量大小
 smallEnemy_down_sound = pygame.mixer.Sound(smallEnemy_down_sound_path)  # 加载small_enemy毁灭音效
 smallEnemy_down_sound.set_volume(0.1)  # small_enemy毁灭音效音量大小
+
+
+def keyboard_control(hero, wudi, bon_num, delay, enemys):
+    """
+    :param hero: hero对象
+    :param wudi: 判断是否无敌的数组
+    :param bon_num: 全屏炸弹次数
+    :param delay: 延迟系数
+    :param enemys: enemys数组
+    :return: NULL
+    """
+    for event in pygame.event.get():  # 检测不常用按钮是否被点击
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == KEYDOWN:
+            if event.key == K_u:
+                wudi[0] = not wudi[0]
+            if event.key == K_SPACE:
+                hero.use_bullet()
+            if event.key == K_TAB:
+                if bon_num > 0:
+                    bon_num -= 1
+                    for enemy in enemys:
+                        if enemy.activate and enemy.rect.left < 1040:
+                            enemy.activate = False
+
+    key_pressed = pygame.key.get_pressed()  # 检测常用按钮是否被持续按下
+    if key_pressed[K_w] or key_pressed[K_UP]:
+        hero.move_up()
+    if key_pressed[K_s] or key_pressed[K_DOWN]:
+        hero.move_down()
+    if key_pressed[K_a] or key_pressed[K_LEFT]:
+        hero.move_left()
+    if key_pressed[K_d] or key_pressed[K_RIGHT]:
+        hero.move_right()
+    if key_pressed[K_SPACE]:
+        if not (delay % 30):
+            hero.use_bullet()
+
+
+def collide_test(hero, enemys, wudi):
+    # 碰撞检测---hero与enemy是否碰撞
+    hero_collide = pygame.sprite.spritecollide(hero, enemys, False, pygame.sprite.collide_mask)
+    if hero_collide:
+        if not wudi[0]:
+            hero.activate = False
+        for enemy in hero_collide:
+            enemy.hp -= 1
+            if enemy.hp <= 0:
+                enemy.activate = False
+
+    # 碰撞检测---bullet与enemy是否碰撞
+    for bullet in hero.hero_bullet_list:
+        bullet_collide = pygame.sprite.spritecollide(bullet, enemys, False)
+        if bullet_collide:
+            bullet.activate = False
+            for enemy in bullet_collide:
+                enemy.hp -= 1
+                if enemy.hp <= 0:
+                    enemy.activate = False
 
 
 def set_music(music_path):
@@ -46,13 +108,13 @@ def main():
     pygame.display.set_caption(game_title)  # 设置标题
     screen = pygame.display.set_mode(background_size)  # 这里后期要调全屏还有硬件加速，在这里修改
     running = True  # 运行关键词，False则中断运行
-    wudi = False
+    wudi = [False]
     clock = pygame.time.Clock()
     delay = delays  # 创建切换图片的延迟系数delay,调整的话在全局变量里面调
+    bon_num = bon_nums  # 创建全屏炸弹次数bon_num,调整的话再全局变量里面调
 
     # 创建对象
     hero = heroPlane.heroPlane(background_size)  # 创建hero对象
-
     enemys = pygame.sprite.Group()
     small_enemys = pygame.sprite.Group()  # 创建small_enemy对象
     mid_enemys = pygame.sprite.Group()  # 创建mid_enemy对象
@@ -63,78 +125,38 @@ def main():
     enemyPlane.add_big_enemy(enemys, big_enemys, 2, background_size)
     enemyPlane.add_boss(enemys, bosses, 1, background_size)
 
-    # 索引值
+    # 创建索引值
     hero_destory_index = 0
     small_enemy_destory_index = 0
     mid_enemy_destory_index = 0
     big_enemy_destory_index = 0
     boss_destory_index = 0
 
-    # group = pygame.sprite.Group()
-    # pygame.sprite.spritecollide()
-
     # 当运行关键词为True时，持续循环，False时终止循环
     while running:
 
-        for event in pygame.event.get():  # 检测不常用按钮是否被点击
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == KEYDOWN:
-                if event.key == K_u:
-                    wudi = not wudi
-                if event.key == K_SPACE:
-                    hero.use_bullet()
+        keyboard_control(hero, wudi, bon_num, delay, enemys)  # 调用键盘控制函数
 
-        key_pressed = pygame.key.get_pressed()  # 检测常用按钮是否被持续按下
-        if key_pressed[K_w] or key_pressed[K_UP]:
-            hero.move_up()
-        if key_pressed[K_s] or key_pressed[K_DOWN]:
-            hero.move_down()
-        if key_pressed[K_a] or key_pressed[K_LEFT]:
-            hero.move_left()
-        if key_pressed[K_d] or key_pressed[K_RIGHT]:
-            hero.move_right()
+        collide_test(hero, enemys, wudi)  # 调用碰撞检测函数
 
-        # 每次循环，延迟系数-1，归零时重置
+        # 每次循环，延迟系数-1，相反时重置
         delay -= 1
         if delay == -delays:
             delay = delays
 
-        # 碰撞检测---hero与enemy是否碰撞
-        hero_collide = pygame.sprite.spritecollide(hero, enemys, False, pygame.sprite.collide_mask)
-        if hero_collide:
-            if not wudi:
-                hero.activate = False
-            for enemy in hero_collide:
-                enemy.hp -= 1
-                if enemy.hp <= 0:
-                    enemy.activate = False
-
-        # 碰撞检测---bullet与enemy是否碰撞
-        for bullet in hero.hero_bullet_list:
-            bullet_collide = pygame.sprite.spritecollide(bullet, enemys, False)
-            if bullet_collide:
-                bullet.activate = False
-                for enemy in bullet_collide:
-                    enemy.hp -= 1
-                    if enemy.hp <= 0:
-                        enemy.activate = False
-
-        # 生成并更新画面
+        # 生成背景
         screen.blit(background, (0, 0))
 
-        # 生成并切换heroPlane图片
+        # 生成并切换heroPlane
         if hero.activate:
             if delay < 0:
                 screen.blit(hero.image2, hero.rect)
             else:
                 screen.blit(hero.image1, hero.rect)
         else:
-            print("GAME OVER")
             hero.reset()
             running = False
-
+        # 生成bullet
         for bullet in hero.hero_bullet_list:
             if bullet.activate:
                 screen.blit(bullet.image, bullet.rect)
@@ -142,7 +164,7 @@ def main():
             else:
                 hero.remove_bullet(bullet)
 
-        # 生成并切换boss图片
+        # 生成并切换boss
         for boss in bosses:
             if boss.activate:
                 boss.move()
@@ -198,4 +220,4 @@ if __name__ == '__main__':
             txt.write(time.asctime(time.localtime(time.time())) + '\n' + traceback.format_exc() + '\n')
         pygame.quit()
         print("出现bug，按下任意键退出。" + "\n" + "请打开游戏文件夹下面的except.txt文件，并将其发送给游戏制作者。")
-        # input()
+        input()

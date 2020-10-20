@@ -1,5 +1,5 @@
 import pygame
-import  bullet
+import bullet
 
 
 class heroPlane(object):

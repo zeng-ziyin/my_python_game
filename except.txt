@@ -118,3 +118,49 @@ Traceback (most recent call last):
     self.rect.left, self.rect.right = rect.rigth, rect.top + 55
 AttributeError: 'pygame.Rect' object has no attribute 'rigth'
 
+Mon Oct 19 20:45:48 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 219, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 102, in main
+    while running:
+UnboundLocalError: local variable 'running' referenced before assignment
+
+Mon Oct 19 20:47:14 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 218, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 125, in main
+    keyboard_control()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 60, in keyboard_control
+    hero.move_right()
+NameError: name 'hero' is not defined
+
+Mon Oct 19 20:47:58 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 219, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 126, in main
+    keyboard_control(hero)
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 63, in keyboard_control
+    if not (delay % 30):
+NameError: name 'delay' is not defined
+
+Tue Oct 20 09:05:29 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 201, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 90, in main
+    if bon_num > 0:
+UnboundLocalError: local variable 'bon_num' referenced before assignment
+
+Tue Oct 20 11:01:28 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 236, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 167, in main
+    collide_test(hero, enemys)
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 72, in collide_test
+    if not wudi[0]:
+NameError: name 'wudi' is not defined
+

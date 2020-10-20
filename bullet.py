@@ -18,7 +18,6 @@ class heroBullet(object):
         self.rect = self.image.get_rect()
         self.width, self.height = background_size
         self.rect.left, self.rect.top = rect.right, rect.top + 55
-        # self.bullet_image_path = bullet_image_path  # bullet路径如果出了问题，这里可能是报错的原因，解决方案是吧image_path用绝对路径写死
         # self.num_y = random.uniform(-1, 1)  # 创建随机y轴偏移
         self.speed = 25
         self.activate = True
