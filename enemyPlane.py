@@ -22,7 +22,7 @@ class smallEnemy(pygame.sprite.Sprite):
         self.hp = 1
         self.activate = True
         self.rect.left, self.rect.top = randint((self.width + self.rect.width), (5 * self.width)), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
         self.mask = pygame.mask.from_surface(self.image)
 
     def move(self):
@@ -34,7 +34,7 @@ class smallEnemy(pygame.sprite.Sprite):
     def reset(self):
         self.activate = True
         self.rect.left, self.rect.top = randint((self.width + self.rect.width), 5 * self.width), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
 
 
 class midEnemy(pygame.sprite.Sprite):
@@ -60,21 +60,21 @@ class midEnemy(pygame.sprite.Sprite):
     def reset(self):
         self.activate = True
         self.rect.left, self.rect.top = randint(2 * (self.width + self.rect.width), 10 * self.width), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
 
 
 class bigEnemy(pygame.sprite.Sprite):
     def __init__(self, background_size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load(".\\py_game_test\\hero.jpg").convert_alpha()
+        self.image = pygame.image.load(".\\images\\enemy3_n1.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.width, self.height = background_size
         self.speed = 1.5
         self.hp = 7
         self.activate = True
         self.rect.left, self.rect.top = randint(3 * (self.width + self.rect.width), 15 * self.width), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
         self.mask = pygame.mask.from_surface(self.image)
 
     def move(self):
@@ -86,15 +86,15 @@ class bigEnemy(pygame.sprite.Sprite):
     def reset(self):
         self.activate = True
         self.rect.left, self.rect.top = randint(3 * (self.width + self.rect.width), 15 * self.width), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
 
 
 class boss(pygame.sprite.Sprite):
     def __init__(self, background_size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image1 = pygame.image.load(".\\py_game_test\\madoka1.jpg").convert_alpha()
-        self.image2 = pygame.image.load(".\\py_game_test\\madoka2.jpg").convert_alpha()
+        self.image1 = pygame.image.load(".\\py_game_test\\madoka1.png").convert_alpha()
+        self.image2 = pygame.image.load(".\\py_game_test\\madoka2.png").convert_alpha()
         self.rect = self.image1.get_rect()
         self.width, self.height = background_size
         self.speed = 0.5
@@ -102,7 +102,7 @@ class boss(pygame.sprite.Sprite):
         self.activate = True
         self.in_sound_key = True
         self.rect.left, self.rect.top = randint(5 * (self.width + self.rect.width), 20 * self.width), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
         self.mask = pygame.mask.from_surface(self.image1)
 
     def move(self):
@@ -114,7 +114,7 @@ class boss(pygame.sprite.Sprite):
     def reset(self):
         self.activate = True
         self.rect.left, self.rect.top = randint(5 * (self.width + self.rect.width), 20 * self.width), \
-                                        randint(0, self.height - self.rect.height)
+                                        randint(30, self.height - self.rect.height - 30)
 
 
 def add_small_enemy(group1, group2, num, background_size):

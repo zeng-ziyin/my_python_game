@@ -1,10 +1,16 @@
 import pygame
 import bullet
+import numpy as np
 
 
 class heroPlane(object):
     """
     heroPlane类
+    传入参数：画布
+    实现函数：1、move：移动heroPlane
+            2、use_bullet：生成bullet，加入到hero_bullet_list中
+            3、remove_bullet：移除bullet
+            4、reset：将heroPlane复位
     """
 
     def __init__(self, background_size):

@@ -178,3 +178,91 @@ Traceback (most recent call last):
     self.image = pygame.image.load(".\\py_game_test\\magic_bullet.jpg")
 pygame.error: Couldn't open .\py_game_test\magic_bullet.jpg
 
+Tue Oct 20 19:50:37 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 216, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 119, in main
+    hero = heroPlane.heroPlane(background_size)  # 创建hero对象
+  File "D:\pycharm\pythonPlaneGameProject\heroPlane.py", line 13, in __init__
+    self.image1 = pygame.image.load(".\\py_game_test\\madoka1.png").convert_alpha()
+pygame.error: Couldn't open .\py_game_test\madoka1.png
+
+Tue Oct 20 19:51:12 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 216, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 140, in main
+    keyboard_control(hero, wudi, bon_num, delay, enemys)  # 调用键盘控制函数
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 47, in keyboard_control
+    hero.use_bullet()
+  File "D:\pycharm\pythonPlaneGameProject\heroPlane.py", line 49, in use_bullet
+    newBullet = bullet.heroBullet(self.rect, self.background_size)
+  File "D:\pycharm\pythonPlaneGameProject\bullet.py", line 17, in __init__
+    self.image = pygame.image.load(".\\py_game_test\\magic_bullet.png")
+pygame.error: Couldn't open .\py_game_test\magic_bullet.png
+
+Fri Oct 23 09:37:35 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 234, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 157, in main
+    keyboard_control(hero, enemys)  # 调用键盘控制函数
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 55, in keyboard_control
+    if bon_num > 0:
+UnboundLocalError: local variable 'bon_num' referenced before assignment
+
+Fri Oct 23 16:38:29 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 268, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 171, in main
+    pussed_rect.right = 1040 - 10
+AttributeError: 'builtin_function_or_method' object has no attribute 'right'
+
+Fri Oct 23 16:39:20 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 268, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 171, in main
+    pussed_rect.left, pussed_rect.top = 1040 - 100, 0
+AttributeError: 'builtin_function_or_method' object has no attribute 'left'
+
+Fri Oct 23 16:59:20 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 273, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 181, in main
+    keyboard_control(hero, enemys)  # 调用键盘控制函数
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 71, in keyboard_control
+    if event.buttom ==1 and pussed_rect.collidepoint(event.pos):
+AttributeError: 'Event' object has no attribute 'buttom'
+
+Fri Oct 23 16:59:39 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 273, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 181, in main
+    keyboard_control(hero, enemys)  # 调用键盘控制函数
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 71, in keyboard_control
+    if event.button ==1 and pussed_rect.collidepoint(event.pos):
+AttributeError: 'Event' object has no attribute 'button'
+
+Fri Oct 23 17:00:18 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 273, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 181, in main
+    keyboard_control(hero, enemys)  # 调用键盘控制函数
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 71, in keyboard_control
+    if event.button ==1 and pussed_rect.collidepoint(event.pos):
+NameError: name 'pussed_rect' is not defined
+
+Fri Oct 23 17:07:49 2020
+Traceback (most recent call last):
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 273, in <module>
+    main()
+  File "D:/pycharm/pythonPlaneGameProject/main.py", line 190, in main
+    screen.blit(pussed_press_image, ())
+TypeError: invalid destination position for blit
+

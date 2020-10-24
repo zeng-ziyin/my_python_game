@@ -5,7 +5,7 @@ import random
 class heroBullet(object):
     """
     bullet类
-    传入参数：画布，bullet的坐标（x，y），bullet图片路径
+    传入参数：画布，bullet的坐标（x，y）
     实现函数：1、display：在画布上显示bullet，并删除越界的bullet
             2、move：移动bullet
             3、is_prime_move：判断是否越界
