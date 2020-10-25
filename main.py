@@ -17,7 +17,7 @@ boss_in_sound_path = ".\\py_game_test\\greatwall.wav"  # boss出场音效
 smallEnemy_down_sound_path = ".\\sound\\enemy1_down.wav"  # small_enemy毁灭音效
 pussed_nor_image_path = ".\\images\\pause_nor.png"  # 暂停图标路径
 pussed_press_image_path = ".\\images\\pause_pressed.png"
-resume_nor_image_path = ".\\images\\resume_nor.png"  #开始图标路径
+resume_nor_image_path = ".\\images\\resume_nor.png"  # 开始图标路径
 resume_press_image_path = ".\\images\\resume_pressed.png"
 font_path = ".\\font\\font.ttf"  # font字体路径
 game_title = "zzy game demo 0.6"  # 游戏标题
@@ -109,15 +109,18 @@ def collide_test(hero, enemys):
     # 碰撞检测---hero与enemy是否碰撞
     hero_collide = pygame.sprite.spritecollide(hero, enemys, False, pygame.sprite.collide_mask)
     if hero_collide:
-        if not wudi[0]:
+        if hero.isCollide and not wudi[0]:
             hero.hp -= 1
             hero.reset()
+            hero.isCollide = False
             if hero.hp <= 0:
                 hero.activate = False
         for enemy in hero_collide:
-            enemy.hp -= 1
-            if enemy.hp <= 0:
-                enemy.activate = False
+            if enemy.isCollide:
+                enemy.hp -= 1
+                enemy.isCollide = False
+                if enemy.hp <= 0:
+                    enemy.activate = False
 
     # 碰撞检测---bullet与enemy是否碰撞
     for bullet in hero.hero_bullet_list:
@@ -139,7 +142,7 @@ def set_music(music_path):
     """
     pygame.mixer.init()
     music = pygame.mixer.Sound(music_path)  # 加载背景音乐
-    music.set_volume(0.4)  # 音量大小
+    music.set_volume(0)  # 音量大小
     music.play(-1)  # 循环次数，-1为无限循环
 
 
@@ -160,9 +163,10 @@ def main():
     global bon_num  # 创建全屏炸弹次数bon_num,调整的话再全局变量里面调
     temp_delay = delay
     global wudi  # 创建无敌标志
-    global score # 初始化得分
+    global score  # 初始化得分
     global pussed  # 创建暂停标志
     level = 1  # 设置等级
+    isCollide = True  # 设置可碰撞判断
 
     # 创建对象
     hero = heroPlane.heroPlane(background_size)  # 创建hero对象
@@ -236,13 +240,19 @@ def main():
         # keyboard_control(hero, enemys, pussed_rect)  # 调用键盘控制函数
 
         collide_test(hero, enemys)  # 调用碰撞检测函数
+        if not (delay % 50):
+            for enemy in enemys:
+                if not enemy.isCollide:
+                    enemy.isCollide = True
+            if not hero.isCollide:
+                hero.isCollide = True
 
         # 每次循环，延迟系数-1，相反时重置
         delay -= 1
         if delay == -temp_delay:
             delay = temp_delay
 
-        screen.blit(pussed_image, (100,100))
+        screen.blit(pussed_image, (100, 100))
         # 生成背景
         screen.blit(background, (0, 0))
 
@@ -253,14 +263,14 @@ def main():
         screen.blit(level_text, (10, 50))
         if lv_temp != level:
             enemyPlane.add_small_enemy(enemys, small_enemys, 5, background_size)
-            if not (level%3):
+            if not (level % 3):
                 enemyPlane.add_mid_enemy(enemys, mid_enemys, 2, background_size)
-            if not (level%5):
+            if not (level % 5):
                 enemyPlane.add_big_enemy(enemys, big_enemys, 1, background_size)
-            if not (level%7):
+            if not (level % 7):
                 for enemy in small_enemys:
                     enemy.speed += 0.5
-            if not (level%10):
+            if not (level % 10):
                 for enemy in mid_enemys:
                     enemy.speed += 0.3
 

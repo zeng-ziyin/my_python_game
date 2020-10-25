@@ -24,6 +24,7 @@ class heroPlane(object):
         self.speed = 10
         self.hp = 3
         self.activate = True
+        self.isCollide = True
         self.mask = pygame.mask.from_surface(self.image1)
         self.hero_bullet_list = []
 
