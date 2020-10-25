@@ -240,7 +240,7 @@ def main():
         # keyboard_control(hero, enemys, pussed_rect)  # 调用键盘控制函数
 
         collide_test(hero, enemys)  # 调用碰撞检测函数
-        if not (delay % 50):
+        if not (delay % 100):
             for enemy in enemys:
                 if not enemy.isCollide:
                     enemy.isCollide = True
